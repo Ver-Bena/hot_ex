@@ -3,6 +3,8 @@
     <div id="excel-table">
       
     </div>
+
+    <result-table></result-table>
   </div>
 </template>
 
@@ -10,9 +12,10 @@
 import Vue from 'vue'
 import Handsontable from 'handsontable'
 import CheckoutButton from './CheckoutButton.vue'
+import ResultTable from './ResultTable.vue'
 
 export default {
-  components : { CheckoutButton },
+  components : { CheckoutButton, ResultTable },
   mounted() {
     this.createTable();
   },
@@ -60,6 +63,9 @@ export default {
         checkoutButton._props.hot = this.hot;
         checkoutButton.$mount(td);
       })
+    },
+    addIt() {
+      return "Add It!";
     }
   }
 }
@@ -67,6 +73,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
+  #app > * {
+    float: left;
+    margin-right: 10px;
+  }
+
   .handsontable td {
     overflow: visible;
     padding: 5px;

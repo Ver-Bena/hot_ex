@@ -18,6 +18,8 @@
 
                 this.table_data.splice(this.index, 1);
                 this.hot.render();
+
+                
             }
         }
     }
