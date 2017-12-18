@@ -7,7 +7,7 @@
           <td>Toyota</td>
           <td>Honda</td>
           <td>Mazda</td>
-          <td>Ford</td>
+          <td>Fod</td>
         </tr>
 
         <!-- <tr v-for="(c, index) in car">
