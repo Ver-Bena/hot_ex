@@ -1,6 +1,6 @@
 <template>
     <td class>
-        <button @click="checkout" class="button">Checkout</button>
+        <button @click="checkin" class="button">Checkin</button>
     </td>
 </template>
 
@@ -8,15 +8,15 @@
 import EventBus from '../EventBus'
 
 export default {
-    name : "CheckoutButton",
-    props : [ 'index', 'table_data', 'hot' ],
+    name : "CheckinButton",
+    props : [ 'result' ],
     methods : {
-        checkout : function() {    
-            this.getDeletedDataHandler(this.index)
-            this.deleteDataHandler(this.index)
+        checkin : function () {
+            // this.addToHot();
+            console.log(this.result)
         },
-        getDeletedDataHandler : function(index) {
-            EventBus.$emit('getResult', this.table_data[index]);
+        addToHot : function() {
+            EventBus.$emit('checkinData', this.result);
         },
         deleteDataHandler : function(index) {
             this.table_data.splice(index, 1)

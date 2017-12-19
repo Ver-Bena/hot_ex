@@ -1,39 +1,45 @@
 <template>
     <table class="result-table">
         <tr>
-          <td></td>
+          <td>year</td>
           <td>Tesla</td>
           <td>Nissan</td>  
           <td>Toyota</td>
           <td>Honda</td>
           <td>Mazda</td>
           <td>Fod</td>
+          <td>Checkin</td>
         </tr>
 
-        <!-- <tr v-for="(c, index) in car">
-            <td>{{c.name}}</td>
-        </tr> -->
+        <tr v-for="(tr_r, i) in result">
+            <td v-for="(td_r, j) in tr_r">
+                {{td_r}}
+            </td>
+
+            <checkin-button></checkin-button>
+        </tr>
     </table>
 </template>
 
 <script>
+import CheckinButton from './CheckinButton.vue'
 import EventBus from '../EventBus';
 
 export default {
   name : "ResultTable",
+  components : { CheckinButton },
   data() {
       return {
         result : [],
       }
   },
-  mounted() {
-      EventBus.$on("deletedData", this.deletedDataHandler);
+  created() {
+    EventBus.$on("getResult", this.getResultHandler);
   },
   methods : {
-    deletedDataHandler : function(text) {
-        //  console.log(text);
-        this.result.push(text)
-        console.log(this.result)
+    getResultHandler : function(row) {
+        this.result.push(row)
+        CheckinButton.props.result = row;
     }
   }
 }

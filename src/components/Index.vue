@@ -23,12 +23,13 @@ export default {
     return {
       hot : {},
       table_data : [
-        { a : '10', b : '11', c : '12', d : '132', e : '15', f : '16', },
-        { a : '10', b : '11', c : '12', d : '13', e : '15', f : '16', },
-        { a : '10', b : '11', c : '12', d : '16', e : '15', f : '16', },
-        { a : '10', b : '11', c : '12', d : '18', e : '15', f : '16', },
-        { a : '10', b : '11', c : '12', d : '1', e : '15', f : '16', },
+        [ '2017', '10', '11', '12', '132', '15', '16' ],
+        [ '2018', '10', '11', '12', '13', '15', '16' ],
+        [ '2019', '10', '11', '12', '16', '15', '16' ],
+        [ '2020', '10', '11', '12', '18', '15', '16' ],
+        [ '2021', '10', '11', '12', '1', '15', '16' ],
       ],
+      table_row_header : [ , '2018', '2019', '2020', '2021' ],
     }
   },
   methods : {
@@ -36,15 +37,16 @@ export default {
       var container = document.getElementById('excel-table');
       this.hot = new Handsontable(container, {
         data : this.table_data,
-        rowHeaders : [ '2017', '2018', '2019', '2020', '2021' ], // 열(row, 가로)의 header 존재 여부
-        colHeaders : ['Tesla', 'Nissan', 'Toyota', 'Honda', 'Mazda', 'Ford', 'Checkout'],
+        rowHeaders : false,
+        colHeaders : [ 'year', 'Tesla', 'Nissan', 'Toyota', 'Honda', 'Mazda', 'Ford', 'Checkout'],
         columns : [
-          { data : "a", renderer : "text" },
-          { data : "b", renderer : "text" },
-          { data : "c", renderer : "text" },
-          { data : "d", renderer : "text" },
-          { data : "e", renderer : "text" },
-          { data : "f", renderer : "text" },
+          { renderer : "text" },
+          { renderer : "text" },
+          { renderer : "text" },
+          { renderer : "text" },
+          { renderer : "text" },
+          { renderer : "text" },
+          { renderer : "text" },
           { renderer : this.buttonRenderer },
         ],
         // filters : true, // 필터기능 존재 여부
@@ -57,16 +59,18 @@ export default {
       let vm = Vue.extend(CheckoutButton);
       let checkoutButton = new vm();
       
+      // checkoutButton 컴포넌트로 데이터 전달
       this.$nextTick(() => {
+        // this.table_data[row].unshift(this.table_row_header[row]);
+
+        // console.log(this.table_data[row].unshift());
+
         checkoutButton._props.index = row;
         checkoutButton._props.table_data = this.table_data;
         checkoutButton._props.hot = this.hot;
         checkoutButton.$mount(td);
       })
     },
-    addIt() {
-      return "Add It!";
-    }
   }
 }
 </script>
