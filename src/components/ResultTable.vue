@@ -17,8 +17,25 @@
 </template>
 
 <script>
+import EventBus from '../EventBus';
+
 export default {
-  name : "ResultTable"  
+  name : "ResultTable",
+  data() {
+      return {
+        result : [],
+      }
+  },
+  mounted() {
+      EventBus.$on("deletedData", this.deletedDataHandler);
+  },
+  methods : {
+    deletedDataHandler : function(text) {
+        //  console.log(text);
+        this.result.push(text)
+        console.log(this.result)
+    }
+  }
 }
 </script>
 

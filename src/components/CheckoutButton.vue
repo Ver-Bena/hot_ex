@@ -5,22 +5,23 @@
 </template>
 
 <script>
-    export default {
-        name : "CheckoutButton",
-        props : [ 'index', 'hot', 'table_data' ],
-        data() {
-            return {
-            }
-        },
-        methods : {
-            checkout : function() {
-                console.log(this.hot);
+import EventBus from '../EventBus';
 
-                this.table_data.splice(this.index, 1);
-                this.hot.render();
-            }
+export default {
+    name : "CheckoutButton",
+    props : [ 'index', 'hot', 'table_data' ],
+    data() {
+        return {
+        }
+    },
+    methods : {
+        checkout : function() {
+            EventBus.$emit('deletedData', this.hot.getDataAtRow(this.index));
+            this.table_data.splice(this.index, 1);
+            this.hot.render();
         }
     }
+}
 </script>
 
 <style>
