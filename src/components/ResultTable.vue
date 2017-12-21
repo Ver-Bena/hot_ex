@@ -38,7 +38,7 @@ export default {
   },
   mounted() {
     EventBus.$on("getResult", this.getResultHandler) // checkout 버튼을 눌렀을 때 EventBus로 해당 row를 전달받는다
-    EventBus.$on("deleteAtResult", this.deleteAtResultHandler) // checkin 버튼을 눌렀을 때 EventBus로 
+    EventBus.$on("deleteAtResult", this.deleteAtResultHandler) // checkin 버튼을 눌렀을 때 EventBus로 해당 row의 index를 전달받는다
   },
   methods : {
     getResultHandler : function(row) {
@@ -48,7 +48,7 @@ export default {
         this.result.push(row) // result 배열에 push
 
         this.$nextTick(() => {
-            checkinButton._props.index = this.result.indexOf(row);
+            checkinButton._props.index = this.result.indexOf(row); // 
             checkinButton._props.result = this.result;
             checkinButton.$mount('.checkin-button')
         })
@@ -62,9 +62,13 @@ export default {
 </script>
 
 <style>
-    table, tr, td {
-        border: 1px solid black;
+    .result-table, .result-table tr, .result-table td {
+        border: 1px solid #ccc;
         border-collapse: collapse;
+    }
+
+    .result-table td {
+        padding: 2px 4px;
     }
 
     .result-table tr:first-child td {

@@ -46,7 +46,7 @@ export default {
                 { renderer : "text" },
                 { renderer : "text" },
                 { renderer : "text" },
-                { renderer : this.buttonRenderer },
+                { editor : false, renderer : this.buttonRenderer },
                 ],
                 // filters : true, // 필터기능 존재 여부
                 // dropdownMenu : true, // dropdown 메뉴 존재 여부
