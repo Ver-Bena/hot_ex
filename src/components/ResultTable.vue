@@ -37,19 +37,25 @@ export default {
       }
   },
   mounted() {
-    EventBus.$on("getResult", this.getResultHandler); // checkout 버튼을 눌렀을 때 EventBus로 해당 row를 전달받는다
+    EventBus.$on("getResult", this.getResultHandler) // checkout 버튼을 눌렀을 때 EventBus로 해당 row를 전달받는다
+    EventBus.$on("deleteAtResult", this.deleteAtResultHandler) // checkin 버튼을 눌렀을 때 EventBus로 
   },
   methods : {
     getResultHandler : function(row) {
-        let vm = Vue.extend(CheckinButton);
-        let checkinButton = new vm();
+        let vm = Vue.extend(CheckinButton)
+        let checkinButton = new vm()
 
         this.result.push(row) // result 배열에 push
 
         this.$nextTick(() => {
-            checkinButton._props.result = row;
-            checkinButton.$mount('.checkin-button');
+            checkinButton._props.index = this.result.indexOf(row);
+            checkinButton._props.result = this.result;
+            checkinButton.$mount('.checkin-button')
         })
+    },
+    deleteAtResultHandler : function(index) {
+        console.log("삭제!", index);
+        this.result.splice(index, 1)
     }
   }
 }

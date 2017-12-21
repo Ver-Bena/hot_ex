@@ -58,7 +58,6 @@ export default {
             
             // checkoutButton 컴포넌트로 데이터 전달
             this.$nextTick(() => {
-
                 checkoutButton._props.index = row;
                 checkoutButton._props.table_data = this.table_data;
                 checkoutButton._props.hot = this.hot;

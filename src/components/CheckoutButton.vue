@@ -12,10 +12,10 @@ export default {
     props : [ 'index', 'table_data', 'hot' ],
     methods : {
         checkout : function() {    
-            this.getDeletedDataHandler(this.index)
+            this.getDataHandler(this.index)
             this.deleteDataHandler(this.index)
         },
-        getDeletedDataHandler : function(index) {
+        getDataHandler : function(index) {
             EventBus.$emit('getResult', this.table_data[index]);
         },
         deleteDataHandler : function(index) {

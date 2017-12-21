@@ -9,11 +9,18 @@ import EventBus from '../EventBus'
 
 export default {
     name : "CheckinButton",
-    props : [ 'result' ],
+    props : [ 'index', 'result' ],
     methods : {
         checkin : function () {
-            EventBus.$emit('addToHot', this.result)
+            this.getResultHandler()
+            this.deleteResultHandler(this.index)
         },
+        getResultHandler : function() {
+            EventBus.$emit('addToHot', this.result[this.index])
+        },
+        deleteResultHandler : function(index) {
+            EventBus.$emit('deleteAtResult', index);
+        }
     }
 }
 </script>
