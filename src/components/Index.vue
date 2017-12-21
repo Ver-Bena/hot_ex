@@ -13,11 +13,16 @@ import Vue from 'vue'
 import Handsontable from 'handsontable'
 import CheckoutButton from './CheckoutButton.vue'
 import ResultTable from './ResultTable.vue'
+import EventBus from '../EventBus'
 
 export default {
   components : { CheckoutButton, ResultTable },
   mounted() {
     this.createTable();
+    EventBus.$on('addToHot', (row) => {
+      this.table_data.push(row);
+      this.hot.render();
+    });
   },
   data : function() {
     return {
@@ -29,7 +34,6 @@ export default {
         [ '2020', '10', '11', '12', '18', '15', '16' ],
         [ '2021', '10', '11', '12', '1', '15', '16' ],
       ],
-      table_row_header : [ , '2018', '2019', '2020', '2021' ],
     }
   },
   methods : {
@@ -61,9 +65,6 @@ export default {
       
       // checkoutButton 컴포넌트로 데이터 전달
       this.$nextTick(() => {
-        // this.table_data[row].unshift(this.table_row_header[row]);
-
-        // console.log(this.table_data[row].unshift());
 
         checkoutButton._props.index = row;
         checkoutButton._props.table_data = this.table_data;

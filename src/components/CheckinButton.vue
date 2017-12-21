@@ -1,5 +1,5 @@
 <template>
-    <td class>
+    <td>
         <button @click="checkin" class="button">Checkin</button>
     </td>
 </template>
@@ -12,16 +12,8 @@ export default {
     props : [ 'result' ],
     methods : {
         checkin : function () {
-            // this.addToHot();
-            console.log(this.result)
+            EventBus.$emit('addToHot', this.result)
         },
-        addToHot : function() {
-            EventBus.$emit('checkinData', this.result);
-        },
-        deleteDataHandler : function(index) {
-            this.table_data.splice(index, 1)
-            this.hot.render()
-        }
     }
 }
 </script>

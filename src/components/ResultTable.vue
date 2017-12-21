@@ -11,17 +11,20 @@
           <td>Checkin</td>
         </tr>
 
-        <tr v-for="(tr_r, i) in result">
-            <td v-for="(td_r, j) in tr_r">
+        <tr v-for="tr_r in result">
+            <td v-for="td_r in tr_r">
                 {{td_r}}
             </td>
+            
+            <td class="checkin-button">
 
-            <checkin-button></checkin-button>
+            </td>
         </tr>
     </table>
 </template>
 
 <script>
+import Vue from 'vue'
 import CheckinButton from './CheckinButton.vue'
 import EventBus from '../EventBus';
 
@@ -33,13 +36,20 @@ export default {
         result : [],
       }
   },
-  created() {
-    EventBus.$on("getResult", this.getResultHandler);
+  mounted() {
+    EventBus.$on("getResult", this.getResultHandler); // checkout 버튼을 눌렀을 때 EventBus로 해당 row를 전달받는다
   },
   methods : {
     getResultHandler : function(row) {
-        this.result.push(row)
-        CheckinButton.props.result = row;
+        let vm = Vue.extend(CheckinButton);
+        let checkinButton = new vm();
+
+        this.result.push(row) // result 배열에 push
+
+        this.$nextTick(() => {
+            checkinButton._props.result = row;
+            checkinButton.$mount('.checkin-button');
+        })
     }
   }
 }
