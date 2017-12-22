@@ -14,8 +14,8 @@ export default {
     components : { CheckoutButton },
     mounted() {
         this.createTable();
-        EventBus.$on('addToHot', (row) => {
-            this.table_data.push(row);
+        EventBus.$on('addToHot', (index) => {
+            this.table_data.push(this.table_data[index]);
             this.hot.render();
         });
     },

@@ -16,7 +16,7 @@ export default {
             this.deleteResultHandler(this.index)
         },
         getResultHandler : function() {
-            EventBus.$emit('addToHot', this.result[this.index])
+            EventBus.$emit('addToHot', this.index)
         },
         deleteResultHandler : function(index) {
             EventBus.$emit('deleteAtResult', index);
