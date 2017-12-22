@@ -9,19 +9,12 @@ import EventBus from '../EventBus'
 
 export default {
     name : "CheckoutButton",
-    props : [ 'index', 'table_data', 'hot' ],
+    props : [ 'index', 'row' ],
     methods : {
-        checkout : function() {    
-            this.getDataHandler(this.index)
-            this.deleteDataHandler(this.index)
+        checkout : function() {
+            EventBus.$emit('getResult', this.row)
+            EventBus.$emit('deleteData', this.index)
         },
-        getDataHandler : function(index) {
-            EventBus.$emit('getResult', this.table_data[index]);
-        },
-        deleteDataHandler : function(index) {
-            this.table_data.splice(index, 1)
-            this.hot.render()
-        }
     }
 }
 </script>

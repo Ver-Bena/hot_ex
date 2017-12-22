@@ -17,7 +17,12 @@ export default {
         EventBus.$on('addToHot', (index) => {
             this.table_data.push(this.table_data[index]);
             this.hot.render();
-        });
+        })
+        
+        EventBus.$on('deleteData', (index) => {
+            this.table_data.splice(index, 1)
+            this.hot.render()
+        })
     },
     data : function() {
         return {
@@ -58,10 +63,10 @@ export default {
             
             // checkoutButton 컴포넌트로 데이터 전달
             this.$nextTick(() => {
-                checkoutButton._props.index = row;
-                checkoutButton._props.table_data = this.table_data;
-                checkoutButton._props.hot = this.hot;
-                checkoutButton.$mount(td);
+                checkoutButton._props.index = row
+                checkoutButton._props.row = this.table_data[row]
+                checkoutButton._props.hot = this.hot
+                checkoutButton.$mount(td)
             })
         },
     }

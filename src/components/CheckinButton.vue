@@ -12,15 +12,9 @@ export default {
     props : [ 'index', 'result' ],
     methods : {
         checkin : function () {
-            this.getResultHandler()
-            this.deleteResultHandler(this.index)
-        },
-        getResultHandler : function() {
             EventBus.$emit('addToHot', this.index)
+            EventBus.$emit('deleteAtResult', this.index)
         },
-        deleteResultHandler : function(index) {
-            EventBus.$emit('deleteAtResult', index);
-        }
     }
 }
 </script>
