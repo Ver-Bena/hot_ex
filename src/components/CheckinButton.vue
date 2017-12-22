@@ -11,9 +11,9 @@ export default {
     name : "CheckinButton",
     props : [ 'index', 'result' ],
     methods : {
-        checkin : function () {
-            EventBus.$emit('addToHot', this.index)
-            EventBus.$emit('deleteAtResult', this.index)
+        checkin : function () { // checkin 버튼을 눌렀을 때
+            EventBus.$emit('addToHot', this.result[this.index]) // ExcelTable의 Handsontable에 ResultTable의 해당 열을 추가
+            EventBus.$emit('deleteAtResult', this.index) // ResultTable에서 checkin한 열을 삭제
         },
     }
 }

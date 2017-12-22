@@ -14,9 +14,9 @@ export default {
     components : { CheckoutButton },
     mounted() {
         this.createTable();
-        EventBus.$on('addToHot', (index) => {
-            this.table_data.push(this.table_data[index]);
-            this.hot.render();
+        EventBus.$on('addToHot', (result) => {
+            this.table_data.push(result)
+            this.hot.render()
         })
         
         EventBus.$on('deleteData', (index) => {
